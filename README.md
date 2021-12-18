@@ -7,7 +7,7 @@ https://nomadcoders.co/c/reactjs-challenge/lobby
 
 ### 사용기술
 
-* frama motion 활용
+* framer motion 활용
   * variants
   * animatePresence
   * layoutId
