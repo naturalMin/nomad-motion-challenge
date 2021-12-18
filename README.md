@@ -1,7 +1,8 @@
-# nomad-motion-challenge
+## nomad-motion-challenge
 Created with CodeSandbox
+https://codesandbox.io/s/github/naturalMin/nomad-motion-challenge
 
-## 노마드코더 React.js Code Challenge
+### 노마드코더 React.js Code Challenge
 https://nomadcoders.co/c/reactjs-challenge/lobby
 
 ### 사용기술
