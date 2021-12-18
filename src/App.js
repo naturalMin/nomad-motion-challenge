@@ -24,10 +24,6 @@ const Board = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform-origin: 0% 0% !important;
-  &:first-child {
-    transform-origin: 100% 100% !important;
-  }
 `;
 const Circle = styled(motion.div)`
   background-color: rgba(255, 255, 255);
@@ -46,6 +42,7 @@ const Button = styled(motion.button)`
   border-radius: 3px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
   font-weight: bold;
+  cursor: pointer;
 `;
 const Overlay = styled(motion.div)`
   width: 100%;
@@ -57,7 +54,16 @@ const Overlay = styled(motion.div)`
 `;
 
 const BoardVars = {
-  hover: { scale: 1.1 }
+  initial: (i) => ({
+    scale: 1,
+    x: 0,
+    y: 0
+  }),
+  hover: (i) => ({
+    scale: 1.1,
+    y: i ? -10 : 10,
+    x: i ? -15 : 15
+  })
 };
 const BtnVars = {
   click: {
@@ -75,21 +81,26 @@ export default function App() {
   const [id, setId] = useState(null);
   const [clicked, setClicked] = useState(false);
   const toggleClicked = () => setClicked((prev) => !prev);
+  const boxClicked = (i) => setId(i);
   return (
     <Container>
       <Boards>
         <Board
-          onClick={() => setId("1")}
+          onClick={() => boxClicked("1")}
           layoutId="1"
           variants={BoardVars}
+          custom={true}
+          initial="initial"
           whileHover="hover"
         />
         <Board>{!clicked ? <Circle layoutId="circle" /> : null}</Board>
         <Board>{clicked ? <Circle layoutId="circle" /> : null}</Board>
         <Board
-          onClick={() => setId("2")}
+          onClick={() => boxClicked("2")}
           layoutId="2"
           variants={BoardVars}
+          custom={false}
+          initial="initial"
           whileHover="hover"
         />
       </Boards>
@@ -99,7 +110,7 @@ export default function App() {
       <AnimatePresence>
         {id ? (
           <Overlay
-            onClick={() => setId(null)}
+            onClick={() => boxClicked(null)}
             variants={overlayVars}
             initial="initial"
             animate="visible"
